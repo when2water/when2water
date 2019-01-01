@@ -1,0 +1,72 @@
+version: '2'
+
+services:
+  web:
+    build: ./w2w.org
+    restart: always
+    labels:
+      traefik.enable: true
+      traefik.docker.network: traefik
+      traefik.port: 80
+      traefik.frontend.rule: Host:when2water.org,www.when2water.org
+    networks:
+      - traefik
+      - default
+  signal:
+    build: ./signal
+    restart: always
+    labels:
+      traefik.enable: true
+      traefik.docker.network: traefik
+      traefik.port: 80
+      traefik.frontend.rule: Host:signal.when2water.org
+    networks:
+      - traefik
+      - default
+  lr:
+    build: ./logistic-regression-model
+    restart: always
+    volumes:
+      - weather-data:/data
+    environment:
+      DATA_LOCATION: /data
+      SIGNAL_SERVER: http://signal
+    labels:
+      traefik.enable: true
+      traefik.docker.network: traefik
+      traefik.port: 80
+      traefik.frontend.rule: Host:lr.when2water.org,api.when2water.org
+    networks:
+      - traefik
+      - default
+  svm:
+    build: ./svm-model
+    restart: always
+    volumes:
+      - weather-data:/data
+    environment:
+      DATA_LOCATION: /data
+      SIGNAL_SERVER: http://signal
+    labels:
+      traefik.enable: true
+      traefik.docker.network: traefik
+      traefik.port: 80
+      traefik.frontend.rule: Host:svm.when2water.org
+    networks:
+      - traefik
+      - default
+  refresh:
+    build: ./data-refresh
+    restart: always
+    volumes:
+      - weather-data:/data
+    environment:
+      DATA_LOCATION: /data
+      API_SERVER: http://lr
+
+volumes:
+  weather-data:
+
+networks:
+  traefik:
+    external: true

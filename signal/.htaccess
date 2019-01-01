@@ -1,0 +1,16 @@
+# Protect the htaccess file
+<Files .htaccess>
+Order Allow,Deny
+Deny from all
+</Files>
+
+# Disable directory browsing
+Options -Indexes
+
+<FilesMatch "Dockerfile|php\.ini">
+Order Allow,Deny
+Deny from all
+</FilesMatch>
+
+RedirectMatch 404 /\.git
+

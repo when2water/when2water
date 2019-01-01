@@ -1,0 +1,3 @@
+[submodule "w2w.org"]
+	path = w2w.org
+	url = ./w2w.org
