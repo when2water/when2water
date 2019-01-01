@@ -1,3 +1,9 @@
 [submodule "w2w.org"]
 	path = w2w.org
-	url = ./w2w.org
+	url = https://github.com/when2water/when2water.org.git
+[submodule "svm-model"]
+	path = svm-model
+	url = https://github.com/when2water/svm-model.git
+[submodule "logistic-regression-model"]
+	path = logistic-regression-model
+	url = https://github.com/when2water/logistic-regression-model.git
