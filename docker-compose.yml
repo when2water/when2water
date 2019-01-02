@@ -9,6 +9,10 @@ services:
       traefik.docker.network: traefik
       traefik.port: 80
       traefik.frontend.rule: Host:when2water.org,www.when2water.org
+      traefik.frontend.headers.SSLRedirect: true
+      traefik.frontend.headers.STSPreload: true
+      traefik.frontend.headers.STSSeconds: 2628000
+      traefik.frontend.headers.STSIncludeSubdomains: true
     networks:
       - traefik
       - default
@@ -20,6 +24,10 @@ services:
       traefik.docker.network: traefik
       traefik.port: 80
       traefik.frontend.rule: Host:signal.when2water.org
+      traefik.frontend.headers.SSLRedirect: true
+      traefik.frontend.headers.STSPreload: true
+      traefik.frontend.headers.STSSeconds: 2628000
+      traefik.frontend.headers.STSIncludeSubdomains: true
     networks:
       - traefik
       - default
@@ -36,6 +44,10 @@ services:
       traefik.docker.network: traefik
       traefik.port: 80
       traefik.frontend.rule: Host:lr.when2water.org,api.when2water.org
+      traefik.frontend.headers.SSLRedirect: true
+      traefik.frontend.headers.STSPreload: true
+      traefik.frontend.headers.STSSeconds: 2628000
+      traefik.frontend.headers.STSIncludeSubdomains: true
     networks:
       - traefik
       - default
@@ -52,6 +64,10 @@ services:
       traefik.docker.network: traefik
       traefik.port: 80
       traefik.frontend.rule: Host:svm.when2water.org
+      traefik.frontend.headers.SSLRedirect: true
+      traefik.frontend.headers.STSPreload: true
+      traefik.frontend.headers.STSSeconds: 2628000
+      traefik.frontend.headers.STSIncludeSubdomains: true
     networks:
       - traefik
       - default
