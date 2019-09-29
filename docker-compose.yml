@@ -6,13 +6,9 @@ services:
     restart: always
     labels:
       traefik.enable: true
-      traefik.docker.network: traefik
-      traefik.port: 80
-      traefik.frontend.rule: Host:when2water.org,www.when2water.org
-      traefik.frontend.headers.SSLRedirect: true
-      traefik.frontend.headers.STSPreload: true
-      traefik.frontend.headers.STSSeconds: 2628000
-      traefik.frontend.headers.STSIncludeSubdomains: true
+      traefik.http.routers.when2water-web.rule: Host(`when2water.org`, `www.when2water.org`)
+      traefik.http.routers.when2water-web.tls: true
+      traefik.http.routers.when2water-web.middlewares: SecureTLS
     networks:
       - traefik
       - default
@@ -21,13 +17,9 @@ services:
     restart: always
     labels:
       traefik.enable: true
-      traefik.docker.network: traefik
-      traefik.port: 80
-      traefik.frontend.rule: Host:signal.when2water.org
-      traefik.frontend.headers.SSLRedirect: true
-      traefik.frontend.headers.STSPreload: true
-      traefik.frontend.headers.STSSeconds: 2628000
-      traefik.frontend.headers.STSIncludeSubdomains: true
+      traefik.http.routers.when2water-signal.rule: Host(`signal.when2water.org`)
+      traefik.http.routers.when2water-signal.tls: true
+      traefik.http.routers.when2water-signal.middlewares: SecureTLS
     networks:
       - traefik
       - default
@@ -41,13 +33,9 @@ services:
       SIGNAL_SERVER: http://signal
     labels:
       traefik.enable: true
-      traefik.docker.network: traefik
-      traefik.port: 80
-      traefik.frontend.rule: Host:lr.when2water.org,api.when2water.org
-      traefik.frontend.headers.SSLRedirect: true
-      traefik.frontend.headers.STSPreload: true
-      traefik.frontend.headers.STSSeconds: 2628000
-      traefik.frontend.headers.STSIncludeSubdomains: true
+      traefik.http.routers.when2water-lr.rule: Host(`lr.when2water.org`, `api.when2water.org`)
+      traefik.http.routers.when2water-lr.tls: true
+      traefik.http.routers.when2water-lr.middlewares: SecureTLS
     networks:
       - traefik
       - default
@@ -61,13 +49,9 @@ services:
       SIGNAL_SERVER: http://signal
     labels:
       traefik.enable: true
-      traefik.docker.network: traefik
-      traefik.port: 80
-      traefik.frontend.rule: Host:svm.when2water.org
-      traefik.frontend.headers.SSLRedirect: true
-      traefik.frontend.headers.STSPreload: true
-      traefik.frontend.headers.STSSeconds: 2628000
-      traefik.frontend.headers.STSIncludeSubdomains: true
+      traefik.http.routers.when2water-svm.rule: Host(`svm.when2water.org`)
+      traefik.http.routers.when2water-svm.tls: true
+      traefik.http.routers.when2water-svm.middlewares: SecureTLS
     networks:
       - traefik
       - default
