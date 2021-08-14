@@ -2,6 +2,7 @@ version: '2'
 
 services:
   web:
+    image: ghcr.io/when2water/when2water-web:latest
     build: ./w2w.org
     restart: always
     labels:
@@ -13,6 +14,7 @@ services:
       - traefik
       - default
   signal:
+    image: ghcr.io/when2water/when2water-signal:latest
     build: ./signal
     restart: always
     labels:
@@ -24,6 +26,7 @@ services:
       - traefik
       - default
   lr:
+    image: ghcr.io/when2water/when2water-logistic-regression:latest
     build: ./logistic-regression-model
     restart: always
     volumes:
@@ -40,6 +43,7 @@ services:
       - traefik
       - default
   svm:
+    image: ghcr.io/when2water/when2water-svm:latest
     build: ./svm-model
     restart: always
     volumes:
@@ -56,6 +60,7 @@ services:
       - traefik
       - default
   refresh:
+    image: ghcr.io/when2water/when2water-data-refresh:latest
     build: ./data-refresh
     restart: always
     volumes:

@@ -1,0 +1,34 @@
+name: Docker Images CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PUSH_IMAGES: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker images
+      run: docker-compose build
+
+    - name: Log in to the Container registry
+      if: ${{ env.PUSH_IMAGES }}
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Publish the Docker images
+      if: ${{ env.PUSH_IMAGES }}
+      run: docker-compose push
