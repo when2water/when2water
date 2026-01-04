@@ -22,7 +22,7 @@ jobs:
         submodules: recursive
 
     - name: Build the Docker images
-      run: docker-compose build
+      run: docker compose build
 
     - name: Log in to the Container registry
       if: ${{ env.PUSH_IMAGES == 'true' }}
@@ -34,4 +34,4 @@ jobs:
 
     - name: Publish the Docker images
       if: ${{ env.PUSH_IMAGES == 'true'  }}
-      run: docker-compose push
+      run: docker compose push
