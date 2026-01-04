@@ -7,7 +7,7 @@ services:
     restart: always
     labels:
       traefik.enable: true
-      traefik.http.routers.when2water-web.rule: Host(`when2water.org`, `www.when2water.org`)
+      traefik.http.routers.when2water-web.rule: Host(`when2water.org`) || Host(`www.when2water.org`)
       traefik.http.routers.when2water-web.tls: true
       traefik.http.routers.when2water-web.middlewares: SecureTLS
     networks:
@@ -36,7 +36,7 @@ services:
       SIGNAL_SERVER: http://signal
     labels:
       traefik.enable: true
-      traefik.http.routers.when2water-lr.rule: Host(`lr.when2water.org`, `api.when2water.org`)
+      traefik.http.routers.when2water-lr.rule: Host(`lr.when2water.org`) || Host(`api.when2water.org`)
       traefik.http.routers.when2water-lr.tls: true
       traefik.http.routers.when2water-lr.middlewares: SecureTLS
     networks:
